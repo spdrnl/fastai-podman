@@ -10,6 +10,9 @@ python = "^3.10"
 fastapi = "^0.88.0"
 uvicorn = "^0.20.0"
 tomli = "^2.0.1"
+fastai = "^2.7.10"
+fastcore = "^1.5.27"
+python-multipart = "^0.0.5"
 
 
 [build-system]

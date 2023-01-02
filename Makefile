@@ -1,11 +1,11 @@
 VERSION := $(shell poetry run python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["version"])')
 
 
-start: remove-container 
-	podman container run -d --name fastapi-podman -p 8000:80 --network bridge fastapi-podman
+start:  
+	podman container run -d --name fastai-podman -p 8000:80 --network bridge fastai-podman
 
 stop:
-	podman stop fastapi-podman
+	podman stop fastai-podman
 
 run-dev:
 	poetry run uvicorn app.main:app --reload
@@ -13,11 +13,14 @@ run-dev:
 dev-install:
 	poetry install
 
-create-container:
-	podman image build -t fastapi-podman .
+create-container: 
+	podman image build -t fastai-podman .
 
-remove-container: stop
-	podman container rm fastapi-podman
+remove-container: 
+	podman container rm fastai-podman
 
 test:
 	http localhost:8000
+
+predict:
+	http -f POST localhost:8000/predict my_file@kitchentool.jpg
